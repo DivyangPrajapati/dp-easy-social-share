@@ -1,0 +1,83 @@
+
+:root {
+    --dpessr-icon-gap: 10px;
+    --dpessr-icon-size: 40px;
+    --dpessr-icon-width: var(--dpessr-icon-size);
+    --dpessr-icon-height: var(--dpessr-icon-size);
+    --dpessr-icon-radius: 50%;
+    --dpessr-svg-size: 16px;
+    --dpessr-svg-width: var(--dpessr-svg-size);
+    --dpessr-svg-height: var(--dpessr-svg-size);
+    --dpessr-icon-color: #ffffff;
+    --dpessr-icon-bg: #f39c12;
+    --dpessr-icon-hover-color: #ffffff;
+    --dpessr-icon-hover-bg: #e67e22;
+    --dpessr-icon-transition: 0.3s;
+    --dpessr-facebook-color: #3b5998;
+    --dpessr-x-color: #000000;
+    --dpessr-linkedin-color: #0077b5;
+    --dpessr-whatsapp-color: #25d366;
+    --dpessr-reddit-color: #ff4500;
+    --dpessr-pinterest-color: #bd081c;
+    --dpessr-email-color: #dd4b39;
+}
+.dpessr-icons { 
+    width: 100%; 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: var(--dpessr-icon-gap);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.dpessr-icons .dpessr-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    width: var(--dpessr-icon-width);
+    height: var(--dpessr-icon-height);
+    background-color: var(--dpessr-icon-bg);
+    color: var(--dpessr-icon-color);
+    border-radius: var(--dpessr-icon-radius);
+    transition: all var(--dpessr-icon-transition) ease;
+}
+.dpessr-icons .dpessr-link:hover {
+    text-decoration: none;
+    background-color: var(--dpessr-icon-hover-bg);
+    color: var(--dpessr-icon-hover-color);
+    transform: scale(1.1);
+}
+.dpessr-icons .dpessr-link svg {
+    width: var(--dpessr-svg-width);
+    height: var(--dpessr-svg-height);
+    display: block;
+    fill: currentColor !important;
+}
+.dpessr-icons.dpessr-colors-brand .dpessr-link.dpessr-facebook {
+    --dpessr-icon-bg: var(--dpessr-facebook-color);
+    --dpessr-icon-hover-bg: var(--dpessr-facebook-color);
+}
+.dpessr-icons.dpessr-colors-brand .dpessr-link.dpessr-x {
+    --dpessr-icon-bg: var(--dpessr-x-color);
+    --dpessr-icon-hover-bg: var(--dpessr-x-color);
+}
+.dpessr-icons.dpessr-colors-brand .dpessr-link.dpessr-linkedin {
+    --dpessr-icon-bg: var(--dpessr-linkedin-color);
+    --dpessr-icon-hover-bg: var(--dpessr-linkedin-color);
+}
+.dpessr-icons.dpessr-colors-brand .dpessr-link.dpessr-whatsapp {
+    --dpessr-icon-bg: var(--dpessr-whatsapp-color);
+    --dpessr-icon-hover-bg: var(--dpessr-whatsapp-color);
+}
+.dpessr-icons.dpessr-colors-brand .dpessr-link.dpessr-reddit {
+    --dpessr-icon-bg: var(--dpessr-reddit-color);
+    --dpessr-icon-hover-bg: var(--dpessr-reddit-color);
+}
+.dpessr-icons.dpessr-colors-brand .dpessr-link.dpessr-pinterest {
+    --dpessr-icon-bg: var(--dpessr-pinterest-color);
+    --dpessr-icon-hover-bg: var(--dpessr-pinterest-color);
+}
+.dpessr-icons.dpessr-colors-brand .dpessr-link.dpessr-email {
+    --dpessr-icon-bg: var(--dpessr-email-color);
+    --dpessr-icon-hover-bg: var(--dpessr-email-color);
+}
