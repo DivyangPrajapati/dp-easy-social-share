@@ -1,0 +1,67 @@
+# Copyright (C) 2025 Divyang Prajapati
+# This file is distributed under the same license as the DP Easy Social Share plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: DP Easy Social Share 1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/dp-easy-social-share\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-03-06T12:53:33+01:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: dp-easy-social-share\n"
+
+#. Plugin Name of the plugin
+#: dp-easy-social-share.php
+msgid "DP Easy Social Share"
+msgstr ""
+
+#. Description of the plugin
+#: dp-easy-social-share.php
+msgid "A simple social sharing plugin for WordPress"
+msgstr ""
+
+#. Author of the plugin
+#: dp-easy-social-share.php
+msgid "Divyang Prajapati"
+msgstr ""
+
+#. Author URI of the plugin
+#: dp-easy-social-share.php
+msgid "https://github.com/DivyangPrajapati"
+msgstr ""
+
+#: dp-easy-social-share.php:119
+msgid "Settings"
+msgstr ""
+
+#: includes/class-dp-easy-social-share-admin.php:52
+msgid "DP Easy Social Share Settings"
+msgstr ""
+
+#: includes/class-dp-easy-social-share-admin.php:72
+msgid "General Settings"
+msgstr ""
+
+#: includes/class-dp-easy-social-share-admin.php:79
+msgid "Social Icons"
+msgstr ""
+
+#: includes/class-dp-easy-social-share-admin.php:87
+msgid "Post Types"
+msgstr ""
+
+#: includes/class-dp-easy-social-share-admin.php:95
+msgid "Display Position"
+msgstr ""
+
+#: includes/class-dp-easy-social-share-admin.php:170
+msgid "Above Post"
+msgstr ""
+
+#: includes/class-dp-easy-social-share-admin.php:171
+msgid "Below Post"
+msgstr ""
