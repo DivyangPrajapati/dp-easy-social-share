@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DP Easy Social Share
  * Description: A simple social sharing plugin for WordPress
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Divyang Prajapati
  * Author URI: https://github.com/DivyangPrajapati
  * License: GPLv3
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /* Define plugin directory constants */
-define( 'DPESSR_PLUGIN_VERSION', '1.0.0' );
+define( 'DPESSR_PLUGIN_VERSION', '1.0.1' );
 define( 'DPESSR_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DPESSR_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
