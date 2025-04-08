@@ -4,8 +4,8 @@ Donate link: https://www.paypal.com/paypalme/PrajapatiDivyang
 Tags: social, social share, social icons, social media, sharing
 Requires at least: 5.0
 Requires PHP: 7.0
-Tested up to: 6.7
-Stable tag: 1.0.0
+Tested up to: 6.8
+Stable tag: 1.0.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -60,14 +60,17 @@ This plugin uses Font Awesome to provide social media icons for sharing posts an
 
 == Changelog ==
 
+= 1.0.1 =
+* Updated compatibility to WordPress 6.8
+
 = 1.0 =
 * Initial release of DP Easy Social Share.
 * Basic social sharing functionality.
 
 == Upgrade Notice ==
 
-= 1.0 =
-This is the initial release of the plugin. No upgrade instructions are required at this time.
+= 1.0.1 =
+Tested for compatibility with WordPress 6.8.
 
 == License ==
 
