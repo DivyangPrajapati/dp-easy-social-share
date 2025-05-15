@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - 
 
+## [1.1.0] - 2025-05-15  
+### Added  
+- dpessr_social_share_url_{$plateform} filter hook
+- dpessr_social_share_icons filter hook
+
 ## [1.0.1] - 2025-04-08
 ### Changed
 - Updated compatibility to WordPress 6.8
