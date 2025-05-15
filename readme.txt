@@ -5,7 +5,7 @@ Tags: social, social share, social icons, social media, sharing
 Requires at least: 5.0
 Requires PHP: 7.0
 Tested up to: 6.8
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -36,6 +36,10 @@ DP Easy Social Share is a simple and lightweight social sharing plugin for WordP
 After installing and activating the plugin, go to the plugin settings page in your WordPress admin area. From there, you can choose which icons to display on your site.
 = Does this plugin support custom post types? =
 Yes. You can specify the post types in the settings page where you want the icons to appear.
+= Can I customize the icons or URLs? =
+Yes. The plugin now supports filters:
+- `dpessr_social_share_url_{$plateform}`: Customize the share URL per social platform.
+- `dpessr_social_share_icons`: Modify the entire array of icon data (label, icon, url, etc).
 
 == Screenshots ==
 
