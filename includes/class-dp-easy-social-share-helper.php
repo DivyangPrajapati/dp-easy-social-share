@@ -78,7 +78,7 @@ class DPESSR_Social_Share_Helper {
             ]
         ];
 
-        return $svgs;
+        return apply_filters('dpessr_social_share_icons', $svgs);
     }
 
     /**
@@ -123,7 +123,7 @@ class DPESSR_Social_Share_Helper {
         $url        = urlencode(esc_url($url));
         $title      = urlencode(esc_html($title));
         $icon_url   = isset($icon) && !empty($icon) ? $icon['url'] : '#';
-        $share_url  = str_replace(['{url}', '{title}'], [$url, $title], $icon_url);
+        $share_url = apply_filters("dpessr_social_share_url_{$plateform}", str_replace(['{url}', '{title}'], [$url, $title], $icon_url));
         return esc_url($share_url);
     }
 }
