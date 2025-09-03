@@ -105,7 +105,7 @@ class DPESSR_Social_Share {
      * @param array $links An array of existing action links.
      * @return array Modified action links array with the settings link.
      */
-    function settings_link( $links ) {
+    public function settings_link( $links ) {
         $settings_link = '<a href="admin.php?page=dp-easy-social-share">' . __( 'Settings', 'dp-easy-social-share' ) . '</a>';
         array_unshift( $links, $settings_link );
         return $links;

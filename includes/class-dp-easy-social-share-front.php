@@ -15,6 +15,8 @@ class DPESSR_Social_Share_Front {
 
     /**
      * Constructor
+     *
+     * @return void
      */
     public function __construct() {
         add_action('wp_enqueue_scripts', [$this, 'enqueue_assets']);
@@ -23,6 +25,8 @@ class DPESSR_Social_Share_Front {
 
     /**
      * Enqueue front-end styles for the plugin.
+     *
+     * @return void
      */
     public function enqueue_assets() {
         wp_enqueue_style( 'dpessr-style', DPESSR_PLUGIN_URL . 'assets/css/style.css', false, DPESSR_PLUGIN_VERSION );
@@ -46,9 +50,10 @@ class DPESSR_Social_Share_Front {
             if (!empty($settings['social_icons'])) {
                 $social_buttons .= '<div class="dpessr-icons dpessr-colors-brand">';
                 foreach ($settings['social_icons'] as $icon) {
-                    $share_link = DPESSR_Social_Share_Helper::get_share_url($icon, $url, $title);
+                    $share_link     = DPESSR_Social_Share_Helper::get_share_url($icon, $url, $title);
+                    $social_title   = DPESSR_Social_Share_Helper::get_social_title($icon);
                     $social_buttons .= '<div class="dpessr-icon">';
-                    $social_buttons .= '<a href="' . esc_url($share_link) . '" target="_blank" class="dpessr-link dpessr-' . esc_attr($icon) . '">' . DPESSR_Social_Share_Helper::get_svg_icon($icon) . '</a>';
+                    $social_buttons .= '<a href="' . esc_url($share_link) . '" target="_blank" rel="noopener nofollow" aria-label="Share on ' . esc_html($social_title) . '" title="Share on ' . esc_html($social_title) . '" class="dpessr-link dpessr-' . esc_attr($icon) . '">' . DPESSR_Social_Share_Helper::get_svg_icon($icon) . '</a>';
                     $social_buttons .= '</div>';
                 }
                 $social_buttons .= '</div>';
