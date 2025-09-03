@@ -20,8 +20,10 @@ class DPESSR_Social_Share_Admin {
      */
      private $positions;
 
-     /**
+    /**
      * Constructor method.
+     *
+     * @return void
      */
     public function __construct() {
         $this->positions = $this->get_positions();
@@ -31,6 +33,8 @@ class DPESSR_Social_Share_Admin {
 
     /**
      * Add the settings page to the WordPress admin menu.
+     *
+     * @return void
      */
     public function add_admin_menu() {
         add_menu_page(
@@ -45,6 +49,8 @@ class DPESSR_Social_Share_Admin {
 
     /**
      * Render the plugin settings page.
+     *
+     * @return void
      */
     public function render_admin_page() {
         ?>
@@ -66,6 +72,8 @@ class DPESSR_Social_Share_Admin {
 
     /**
      * Register plugin settings.
+     *
+     * @return void
      */
     public function register_settings() {
         register_setting( 'dpessr_settings_group', 'dpessr_settings', [
@@ -130,6 +138,8 @@ class DPESSR_Social_Share_Admin {
 
     /**
      * Render social icons checkboxes field.
+     *
+     * @return void
      */
     public function render_social_icons_field() {
         $options    = get_option( 'dpessr_settings' );
@@ -143,6 +153,8 @@ class DPESSR_Social_Share_Admin {
 
     /**
      * Render post types checkboxes field.
+     *
+     * @return void
      */
     public function render_post_types_field() {
         $options    = get_option( 'dpessr_settings' );
@@ -156,6 +168,8 @@ class DPESSR_Social_Share_Admin {
 
     /**
      * Render Display Position redio field.
+     *
+     * @return void
      */
     public function render_display_position_field() {
         $options    = get_option( 'dpessr_settings' );
@@ -169,6 +183,8 @@ class DPESSR_Social_Share_Admin {
 
     /**
      * Get positions.
+     *
+     * @return void
      */
     public function get_positions() {
         $positions = [

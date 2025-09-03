@@ -5,7 +5,7 @@ Tags: social, social share, social icons, social media, sharing
 Requires at least: 5.0
 Requires PHP: 7.0
 Tested up to: 6.8
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -38,8 +38,29 @@ After installing and activating the plugin, go to the plugin settings page in yo
 Yes. You can specify the post types in the settings page where you want the icons to appear.
 = Can I customize the icons or URLs? =
 Yes. The plugin now supports filters:
-- `dpessr_social_share_url_{$plateform}`: Customize the share URL per social platform.
+- `dpessr_social_share_url_{$platform}`: Customize the share URL per social platform.
 - `dpessr_social_share_icons`: Modify the entire array of icon data (label, icon, url, etc).
+
+**Examples:**
+
+*Change WhatsApp share URL:*
+```php
+add_filter('dpessr_social_share_url_whatsapp', function($url, $post_url, $post_title) {
+    return 'https://wa.me/?text=' . urlencode($post_title . ' ' . $post_url);
+}, 10, 3);
+```
+
+*Modify icon data (e.g., add a custom platform):*
+```php
+add_filter('dpessr_social_share_icons', function($icons) {
+    $icons['custom'] = [
+        'name' => 'Custom',
+        'icon' => '<svg>...</svg>',
+        'url'  => 'https://custom.com/share?u={url}',
+    ];
+    return $icons;
+});
+```
 
 == Screenshots ==
 
@@ -64,14 +85,25 @@ This plugin uses Font Awesome to provide social media icons for sharing posts an
 
 == Changelog ==
 
+= 1.1.1 =
+* Improved SVG icon handling and sanitization for security.
+* Enhanced accessibility and responsiveness of icons.
+* Minor code and style improvements.
+
+= 1.1.0 =
+* Added filter hooks for customizing share URLs and icon data.
+
 = 1.0.1 =
 * Updated compatibility to WordPress 6.8
 
-= 1.0 =
+= 1.0.0 =
 * Initial release of DP Easy Social Share.
 * Basic social sharing functionality.
 
 == Upgrade Notice ==
+
+= 1.1.0 =
+Adds developer filter hooks.
 
 = 1.0.1 =
 Tested for compatibility with WordPress 6.8.
