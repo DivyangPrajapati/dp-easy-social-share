@@ -5,7 +5,7 @@ Tags: social, social share, social icons, social media, sharing
 Requires at least: 5.0
 Requires PHP: 7.0
 Tested up to: 6.8
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -84,6 +84,11 @@ This plugin uses Font Awesome to provide social media icons for sharing posts an
   - [Font Awesome Privacy Policy](https://fontawesome.com/privacy)
 
 == Changelog ==
+
+= 1.1.1 =
+* Improved SVG icon handling and sanitization for security.
+* Enhanced accessibility and responsiveness of icons.
+* Minor code and style improvements.
 
 = 1.1.0 =
 * Added filter hooks for customizing share URLs and icon data.
