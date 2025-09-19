@@ -20,7 +20,7 @@ class DPESSR_Social_Share_Front {
      */
     public function __construct() {
         add_action('wp_enqueue_scripts', [$this, 'enqueue_assets']);
-        add_filter('the_content', [$this, 'add_social_icons_to_content']);
+        add_filter('the_content', [$this, 'add_social_networks_to_content']);
     }
 
     /**
@@ -33,23 +33,26 @@ class DPESSR_Social_Share_Front {
     }
 
     /**
-     * Add social icons to the content based on plugin settings.
+     * Add social networks to the content based on plugin settings.
      *
      * @param string $content The original post content.
-     * @return string The content with social icons added, if applicable.
+     * @return string The content with social networks added, if applicable.
      */
-    public function add_social_icons_to_content($content) {
-        $settings   = get_option( 'dpessr_settings' );
-        $post_types = isset($settings['post_types']) && !empty($settings['post_types']) ? $settings['post_types'] : [];
+    public function add_social_networks_to_content($content) {
+        // Load settings
+        $settings   = get_option( 'dpessr_share_settings', [] );
+        $inline     = get_option( 'dpessr_share_inline', [] );
+
+        $post_types = isset($inline['post_types']) && !empty($inline['post_types']) ? $inline['post_types'] : [];
 
         if (is_singular() && in_array(get_post_type(), $post_types, true)) {
             $social_buttons = '';
             $url    = get_permalink();
             $title  = get_the_title();
 
-            if (!empty($settings['social_icons'])) {
+            if (!empty($settings['networks'])) {
                 $social_buttons .= '<div class="dpessr-icons dpessr-colors-brand">';
-                foreach ($settings['social_icons'] as $icon) {
+                foreach ($settings['networks'] as $icon) {
                     $share_link     = DPESSR_Social_Share_Helper::get_share_url($icon, $url, $title);
                     $social_title   = DPESSR_Social_Share_Helper::get_social_title($icon);
                     $social_buttons .= '<div class="dpessr-icon">';
@@ -59,7 +62,7 @@ class DPESSR_Social_Share_Front {
                 $social_buttons .= '</div>';
             }
 
-            if ($settings['display_position'] === 'above') {
+            if ($inline['display_position'] === 'above') {
                 return $social_buttons . $content;
             } else {
                 return $content . $social_buttons;

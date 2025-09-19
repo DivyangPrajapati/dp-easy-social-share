@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /* Define plugin directory constants */
-define( 'DPESSR_PLUGIN_VERSION', '1.1.1' );
+define( 'DPESSR_PLUGIN_VERSION', '2.0.0' );
 define( 'DPESSR_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DPESSR_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
@@ -71,8 +71,8 @@ class DPESSR_Social_Share {
         register_activation_hook(__FILE__, [$this, 'activate']);
         register_deactivation_hook(__FILE__, [$this, 'deactivate']);
 
+        add_action( 'plugins_loaded', [$this, 'dpessr_maybe_upgrade'] );
         add_action('init', [$this, 'init_plugin']);
-
         add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), [$this, 'settings_link'] );
     }
 
@@ -81,15 +81,13 @@ class DPESSR_Social_Share {
      */
     public function activate() {
         // Add default options if not exists
-        if (!get_option('dpessr_settings')) {
-            $default_options = [
-                'social_icons'      => ['facebook', 'x', 'linkedin', 'email'],
-                'post_types'        => ['post', 'page'],
-                'display_position'  => 'below'
-            ];
+        if (!get_option('dpessr_share_settings')) {
+            $default_options = DPESSR_Social_Share_Helper::get_default_share_settings();
 
-            update_option('dpessr_settings', $default_options);
-        } 
+            update_option('dpessr_share_settings', $default_options['share_settings']);
+            update_option('dpessr_share_inline', $default_options['share_inline']);
+            update_option('dpessr_share_floating', $default_options['share_floating']);
+        }
     }
 
     /**
@@ -109,6 +107,55 @@ class DPESSR_Social_Share {
         $settings_link = '<a href="admin.php?page=dp-easy-social-share">' . __( 'Settings', 'dp-easy-social-share' ) . '</a>';
         array_unshift( $links, $settings_link );
         return $links;
+    }
+
+    /**
+     * Run migrations if the plugin version has changed.
+     */
+    function dpessr_maybe_upgrade() {
+        $current_version = get_option( 'dpessr_version', '1.1.0' );
+
+        if ( version_compare( $current_version, DPESSR_PLUGIN_VERSION, '<' ) ) {
+            $this->run_migrations( $current_version );
+            update_option( 'dpessr_version', DPESSR_PLUGIN_VERSION );
+        }
+    }
+
+    /**
+     * Run necessary migrations based on version.
+     *
+     * @param string $from_version The version from which to migrate.
+     */
+    private function run_migrations( $from_version ) {
+        if ( version_compare( $from_version, '2.0.0', '<' ) ) {
+            $old = get_option( 'dpessr_settings', [] );
+
+            if ( ! empty( $old ) ) {
+                // Inline settings
+                if ( isset( $old['display_position'] ) ) {
+                    update_option( 'dpessr_share_inline', [
+                        'enabled'           => 1,
+                        'post_types'        => $old['post_types'] ?? [],
+                        'display_position'  => $old['display_position'],
+                    ] );
+                }
+
+                // Floating (default disabled on upgrade)
+                update_option( 'dpessr_share_floating', [
+                    'enabled'  => 0,
+                    'position' => 'left',
+                ]);
+
+                // Move icons to share settings
+                if ( isset( $old['social_icons'] ) ) {
+                    $share_settings = ['networks' => $old['social_icons'] ];
+                    update_option( 'dpessr_share_settings', $share_settings );
+                }
+
+                // Delete old settings
+                delete_option( 'dpessr_settings' );
+            }
+        }
     }
 
     /**

@@ -120,26 +120,26 @@ class DPESSR_Social_Share_Helper {
     /**
      * Get social icon svg by its name.
      *
-     * @param string $platform Social icon name.
+     * @param string $network Social icon name.
      *
      * @return string Sanitized SVG icon.
      */
-    public static function get_svg_icon( $platform ) {
-        $icon = self::get_social_icon( $platform );
+    public static function get_svg_icon( $network ) {
+        $icon = self::get_social_icon( $network );
         return $icon ? self::sanitize_svg($icon['icon']) : '';
     }
 
     /**
      * Get social icon share url by its name.
      *
-     * @param string $platform Social icon name.
+     * @param string $network Social icon name.
      * @param string $url      URL to share.
      * @param string $title    Title to share.
      *
      * @return string Sanitized share URL.
      */
-    public static function get_share_url( $platform, $url = "#", $title = "" ) {
-        $icon       = self::get_social_icon( $platform );
+    public static function get_share_url( $network, $url = "#", $title = "" ) {
+        $icon       = self::get_social_icon( $network );
         if ( ! $icon ) {
             return '#';
         }
@@ -148,7 +148,7 @@ class DPESSR_Social_Share_Helper {
         $title      = urlencode(esc_html($title));
 
         $share_url  = str_replace(['{url}', '{title}'], [$url, $title], $icon['url']);
-        $share_url  = apply_filters("dpessr_social_share_url_{$platform}", $share_url);
+        $share_url  = apply_filters("dpessr_social_share_url_{$network}", $share_url);
 
         return esc_url($share_url);
     }
@@ -156,12 +156,40 @@ class DPESSR_Social_Share_Helper {
     /**
      * Get social icon title by its name.
      *
-     * @param string $platform Social icon name.
+     * @param string $network Social icon name.
      *
      * @return string Sanitized social icon title.
      */
-    public static function get_social_title( $platform ) {
-        $icon = self::get_social_icon( $platform );
+    public static function get_social_title( $network ) {
+        $icon = self::get_social_icon( $network );
         return $icon ? esc_html($icon['name']) : '';
+    }
+
+    /**
+     * Get default settings.
+     *
+     * @return array Default settings.
+     */
+    public static function get_default_share_settings() {
+        $share_settings = [
+            'networks' => ['facebook', 'x', 'linkedin', 'whatsapp']
+        ];
+
+        $share_inline  = [
+            'enabled'           => 1,
+            'post_types'        => ['post', 'page'],
+            'display_position'  => 'below'
+        ];
+
+        $share_floating = [
+            'enabled'   => 0,
+            'position'  => 'left',
+        ];
+
+        return [
+            'share_settings'    => $share_settings,
+            'share_inline'      => $share_inline,
+            'share_floating'    => $share_floating,
+        ];
     }
 }
