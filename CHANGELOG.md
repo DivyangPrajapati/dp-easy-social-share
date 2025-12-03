@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - 
 
+## [1.1.2] - 2025-12-03  
+### Changed
+- Improved share URL encoding with `rawurlencode()` for RFC-compliant formatting.
+- Escaped original URL and title prior to encoding for increased safety.
+- Tested and updated compatibility to WordPress 6.9.
+
+### Security
+- Ensured returned share URLs remain safely escaped.
+
 ## [1.1.1] - 2025-09-03  
 ### Changed  
 - Improved SVG icon handling and sanitization for security.
