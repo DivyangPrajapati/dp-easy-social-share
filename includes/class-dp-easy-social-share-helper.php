@@ -144,11 +144,13 @@ class DPESSR_Social_Share_Helper {
             return '#';
         }
 
-        $url        = urlencode(esc_url($url));
-        $title      = urlencode(esc_html($title));
+        $esc_url        = esc_url( $url );
+        $esc_title      = esc_html( $title );
+        $encoded_url    = rawurlencode( $esc_url );
+        $encoded_title  = rawurlencode( $esc_title );
 
-        $share_url  = str_replace(['{url}', '{title}'], [$url, $title], $icon['url']);
-        $share_url  = apply_filters("dpessr_social_share_url_{$network}", $share_url);
+        $share_url  = str_replace(['{url}', '{title}'], [$encoded_url, $encoded_title], $icon['url']);
+        $share_url  = apply_filters("dpessr_social_share_url_{$network}", $share_url, $esc_url, $esc_title);
 
         return esc_url($share_url);
     }

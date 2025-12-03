@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/paypalme/PrajapatiDivyang
 Tags: social, social share, social icons, social media, sharing
 Requires at least: 5.0
 Requires PHP: 7.0
-Tested up to: 6.8
+Tested up to: 6.9
 Stable tag: 1.1.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
