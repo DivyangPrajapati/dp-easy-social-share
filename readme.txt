@@ -4,8 +4,8 @@ Donate link: https://www.paypal.com/paypalme/PrajapatiDivyang
 Tags: social, social share, social icons, social media, sharing
 Requires at least: 5.0
 Requires PHP: 7.0
-Tested up to: 6.9
-Stable tag: 1.1.2
+Tested up to: 7.0
+Stable tag: 1.1.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -85,6 +85,9 @@ This plugin uses Font Awesome to provide social media icons for sharing posts an
 
 == Changelog ==
 
+= 1.1.3 =
+* Updated compatibility to WordPress 7.0
+
 = 1.1.2 =
 * Improved share URL encoding with rawurlencode for better standards compliance.
 * Escaped raw URL and title values before filtering for enhanced safety.
@@ -106,6 +109,9 @@ This plugin uses Font Awesome to provide social media icons for sharing posts an
 * Basic social sharing functionality.
 
 == Upgrade Notice ==
+
+= 1.1.3 =
+Tested for compatibility with WordPress 7.0.
 
 = 1.1.2 =
 Improved share URL handling, extended filter support, and tested with WordPress 6.9.

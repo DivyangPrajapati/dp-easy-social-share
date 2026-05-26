@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - 
 
+## [1.1.3] - 2026-05-26
+### Changed
+- Updated compatibility to WordPress 7.0
+- Bumped plugin version from `1.1.2` to `1.1.3`
+
 ## [1.1.2] - 2025-12-03  
 ### Changed
 - Improved share URL encoding with `rawurlencode()` for RFC-compliant formatting.
