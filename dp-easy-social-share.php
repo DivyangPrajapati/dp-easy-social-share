@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DP Easy Social Share
  * Description: A simple social sharing plugin for WordPress
- * Version: 1.1.2
+ * Version: 1.1.3
  * Author: Divyang Prajapati
  * Author URI: https://github.com/DivyangPrajapati
  * License: GPLv3
