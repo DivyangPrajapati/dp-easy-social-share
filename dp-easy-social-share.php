@@ -116,7 +116,7 @@ class DPESSR_Social_Share {
      * Run migrations if the plugin version has changed.
      */
     function dpessr_maybe_upgrade() {
-        $current_version = get_option( 'dpessr_version', '1.1.2' );
+        $current_version = get_option( 'dpessr_version', '1.1.3' );
 
         if ( version_compare( $current_version, DPESSR_PLUGIN_VERSION, '<' ) ) {
             $this->run_migrations( $current_version );
