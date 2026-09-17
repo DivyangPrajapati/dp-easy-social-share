@@ -184,14 +184,44 @@ class DPESSR_Social_Share_Helper {
         ];
 
         $share_floating = [
-            'enabled'   => 0,
-            'position'  => 'left',
+            'enabled'           => 0,
+            'post_types'        => [],
+            'display_position' => 'left',
         ];
 
         return [
-            'share_settings'    => $share_settings,
-            'share_inline'      => $share_inline,
-            'share_floating'    => $share_floating,
+            'general'   => $share_settings,
+            'inline'    => $share_inline,
+            'floating'  => $share_floating,
+        ];
+    }
+
+    /**
+     * Get reset settings.
+     *
+     * @return array Reset settings.
+     */
+    public static function get_reset_share_settings() {
+        $share_settings = [
+            'networks' => []
+        ];
+
+        $share_inline  = [
+            'enabled'           => 1,
+            'post_types'        => ['post', 'page'],
+            'display_position'  => 'below'
+        ];
+
+        $share_floating = [
+            'enabled'           => 0,
+            'post_types'        => [],
+            'display_position'  => 'left',
+        ];
+
+        return [
+            'general'   => $share_settings,
+            'inline'    => $share_inline,
+            'floating'  => $share_floating,
         ];
     }
 }

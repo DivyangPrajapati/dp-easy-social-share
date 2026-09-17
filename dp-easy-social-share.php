@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DP Easy Social Share
  * Description: A simple social sharing plugin for WordPress
- * Version: 1.1.2
+ * Version: 1.1.3
  * Author: Divyang Prajapati
  * Author URI: https://github.com/DivyangPrajapati
  * License: GPLv3
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /* Define plugin directory constants */
-define( 'DPESSR_PLUGIN_VERSION', '2.0.0' );
+define( 'DPESSR_PLUGIN_VERSION', '1.1.3' );
 define( 'DPESSR_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DPESSR_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
@@ -84,9 +84,12 @@ class DPESSR_Social_Share {
         if (!get_option('dpessr_share_settings')) {
             $default_options = DPESSR_Social_Share_Helper::get_default_share_settings();
 
-            update_option('dpessr_share_settings', $default_options['share_settings']);
-            update_option('dpessr_share_inline', $default_options['share_inline']);
-            update_option('dpessr_share_floating', $default_options['share_floating']);
+            update_option('dpessr_share_settings', $default_options);
+        }
+
+        // Record activation time so the review notice can wait a respectful amount of time before showing.
+        if ( ! get_option( 'dpessr_activated_time' ) ) {
+            update_option( 'dpessr_activated_time', time() );
         }
     }
 
@@ -113,7 +116,7 @@ class DPESSR_Social_Share {
      * Run migrations if the plugin version has changed.
      */
     function dpessr_maybe_upgrade() {
-        $current_version = get_option( 'dpessr_version', '1.1.0' );
+        $current_version = get_option( 'dpessr_version', '1.1.3' );
 
         if ( version_compare( $current_version, DPESSR_PLUGIN_VERSION, '<' ) ) {
             $this->run_migrations( $current_version );
@@ -131,27 +134,24 @@ class DPESSR_Social_Share {
             $old = get_option( 'dpessr_settings', [] );
 
             if ( ! empty( $old ) ) {
-                // Inline settings
-                if ( isset( $old['display_position'] ) ) {
-                    update_option( 'dpessr_share_inline', [
+                // Migrate old settings to new structure
+                $share_settings = [
+                    'general' => [
+                        'networks' => $old['social_icons'] ?? [],
+                    ],
+                    'inline' => [
                         'enabled'           => 1,
                         'post_types'        => $old['post_types'] ?? [],
-                        'display_position'  => $old['display_position'],
-                    ] );
-                }
-
-                // Floating (default disabled on upgrade)
-                update_option( 'dpessr_share_floating', [
-                    'enabled'  => 0,
-                    'position' => 'left',
-                ]);
-
-                // Move icons to share settings
-                if ( isset( $old['social_icons'] ) ) {
-                    $share_settings = ['networks' => $old['social_icons'] ];
-                    update_option( 'dpessr_share_settings', $share_settings );
-                }
-
+                        'display_position'  => $old['display_position'] ?? 'below',
+                    ],
+                    'floating' => [
+                        'enabled'           => 0,
+                        'post_types'        => [],
+                        'display_position'  => 'left',
+                    ]
+                ];
+                update_option( 'dpessr_share_settings', $share_settings );
+                
                 // Delete old settings
                 delete_option( 'dpessr_settings' );
             }
