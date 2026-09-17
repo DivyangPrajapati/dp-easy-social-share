@@ -20,7 +20,8 @@ class DPESSR_Social_Share_Front {
      */
     public function __construct() {
         add_action('wp_enqueue_scripts', [$this, 'enqueue_assets']);
-        add_filter('the_content', [$this, 'add_social_icons_to_content']);
+        add_filter('the_content', [$this, 'add_inline_social_networks_to_content']);
+        add_action( 'wp_footer', [$this, 'render_floating_social_networks'] );
     }
 
     /**
@@ -33,33 +34,27 @@ class DPESSR_Social_Share_Front {
     }
 
     /**
-     * Add social icons to the content based on plugin settings.
+     * Add social networks to the content based on plugin settings.
      *
      * @param string $content The original post content.
-     * @return string The content with social icons added, if applicable.
+     * @return string The content with social networks added, if applicable.
      */
-    public function add_social_icons_to_content($content) {
-        $settings   = get_option( 'dpessr_settings' );
-        $post_types = isset($settings['post_types']) && !empty($settings['post_types']) ? $settings['post_types'] : [];
+    public function add_inline_social_networks_to_content($content) {
+        // Load settings
+        $settings   = get_option( 'dpessr_share_settings', [] );
+        $general    = $settings['general'] ?? [];
+        $inline     = $settings['inline'] ?? [];
 
-        if (is_singular() && in_array(get_post_type(), $post_types, true)) {
-            $social_buttons = '';
-            $url    = get_permalink();
-            $title  = get_the_title();
+        $is_active  = !empty($inline['enabled']);
+        $post_types = isset($inline['post_types']) && !empty($inline['post_types']) ? $inline['post_types'] : [];
 
-            if (!empty($settings['social_icons'])) {
-                $social_buttons .= '<div class="dpessr-icons dpessr-colors-brand">';
-                foreach ($settings['social_icons'] as $icon) {
-                    $share_link     = DPESSR_Social_Share_Helper::get_share_url($icon, $url, $title);
-                    $social_title   = DPESSR_Social_Share_Helper::get_social_title($icon);
-                    $social_buttons .= '<div class="dpessr-icon">';
-                    $social_buttons .= '<a href="' . esc_url($share_link) . '" target="_blank" rel="noopener nofollow" aria-label="Share on ' . esc_html($social_title) . '" title="Share on ' . esc_html($social_title) . '" class="dpessr-link dpessr-' . esc_attr($icon) . '">' . DPESSR_Social_Share_Helper::get_svg_icon($icon) . '</a>';
-                    $social_buttons .= '</div>';
-                }
-                $social_buttons .= '</div>';
-            }
+        if ($is_active && is_singular() && in_array(get_post_type(), $post_types, true)) {
+            $url            = get_permalink();
+            $title          = get_the_title();
+            $networks       = $general['networks'] ?? [];
+            $social_buttons = $this->render_icons_html( $networks, $url, $title, 'dpessr-icons dpessr-colors-brand dpessr-inline-icons' );
 
-            if ($settings['display_position'] === 'above') {
+            if ($inline['display_position'] === 'above') {
                 return $social_buttons . $content;
             } else {
                 return $content . $social_buttons;
@@ -67,5 +62,63 @@ class DPESSR_Social_Share_Front {
         }
 
         return $content;
+    }
+
+    /**
+     * Render floating icons in the footer.
+     *
+     * @return void
+     */
+    public function render_floating_social_networks() {
+        // Load settings
+        $settings   = get_option( 'dpessr_share_settings', [] );
+        $general    = $settings['general'] ?? [];
+        $floating   = $settings['floating'] ?? [];
+
+        $is_active  = !empty($floating['enabled']);
+        $post_types = isset($floating['post_types']) && !empty($floating['post_types']) ? $floating['post_types'] : [];
+        $position   = $floating['display_position'] ?? 'left';
+
+        if ($is_active && is_singular() && in_array(get_post_type(), $post_types, true)) {
+            $url            = get_permalink();
+            $title          = get_the_title();
+            $networks       = $general['networks'] ?? [];
+            $wrapper_classes = 'dpessr-icons dpessr-colors-brand dpessr-floating dpessr-floating-' . esc_attr($position);
+
+            echo $this->render_icons_html( $networks, $url, $title, $wrapper_classes );
+        }
+    }
+
+    /**
+     * Build the share-icons HTML markup for a given list of networks.
+     *
+     * Shared by both the inline (the_content) and floating (wp_footer)
+     * renderers so the per-icon markup stays in exactly one place.
+     *
+     * @param array  $networks        List of enabled network keys (e.g. ['facebook', 'x']).
+     * @param string $url             The URL to share.
+     * @param string $title           The title to share.
+     * @param string $wrapper_classes Space-separated class list for the outer wrapping <div>.
+     * @return string The rendered icons HTML, or an empty string if there are no networks.
+     */
+    private function render_icons_html( $networks, $url, $title, $wrapper_classes ) {
+        if ( empty( $networks ) ) {
+            return '';
+        }
+
+        $html = '<div class="' . esc_attr( $wrapper_classes ) . '">';
+
+        foreach ( $networks as $icon ) {
+            $share_link   = DPESSR_Social_Share_Helper::get_share_url( $icon, $url, $title );
+            $social_title = DPESSR_Social_Share_Helper::get_social_title( $icon );
+
+            $html .= '<div class="dpessr-icon">';
+            $html .= '<a href="' . esc_url( $share_link ) . '" target="_blank" rel="noopener nofollow" aria-label="Share on ' . esc_html( $social_title ) . '" title="Share on ' . esc_html( $social_title ) . '" class="dpessr-link dpessr-' . esc_attr( $icon ) . '">' . DPESSR_Social_Share_Helper::get_svg_icon( $icon ) . '</a>';
+            $html .= '</div>';
+        }
+
+        $html .= '</div>';
+
+        return $html;
     }
 }
