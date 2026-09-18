@@ -7,10 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+-
+
+## [2.0.0] - 2026-09-18
+### Added
 - Floating share sidebar, fixed to the left or right edge of the screen, with its own enable/disable toggle, post type targeting, and position setting, independent of inline icons.
 - Subtle slide-in and fade-in entrance animation for the floating sidebar, with `prefers-reduced-motion` support.
 - Time-delayed, dismissible admin notice inviting a plugin review, shown only after 7 days of active use, with rate now / already rated / maybe later actions that persist the choice via `wp_options`.
 - Brand logo in the admin settings header, replacing the plain text heading, with a visually-hidden accessible label retained for screen readers.
+
+### Changed
+- Updated compatibility to WordPress 7.1
 
 ## [1.1.3] - 2026-05-26
 ### Changed

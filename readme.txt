@@ -5,7 +5,7 @@ Tags: social, social share, social icons, social media, sharing
 Requires at least: 5.0
 Requires PHP: 7.0
 Tested up to: 7.1
-Stable tag: 1.1.3
+Stable tag: 2.0.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -95,12 +95,13 @@ This plugin uses Font Awesome to provide social media icons for sharing posts an
 
 == Changelog ==
 
-= Unreleased =
+= 2.0.0 =
 * Added: Floating share sidebar, fixed to the left or right edge of the screen, with its own enable/disable, post type targeting, and position setting, independent of inline icons.
 * Added: Subtle slide-in and fade-in entrance animation for the floating sidebar (respects the visitor's reduced-motion preference).
 * Added: Tab-style rounded edge on floating icons (rounded on the outer edge only, flush against the screen edge) instead of full circles.
 * Added: Time-delayed, dismissible "please rate us" admin notice, shown only after a week of active use, with rate now / already rated / maybe later options that persist your choice.
 * Added: Brand logo in the admin settings header.
+* Tested for compatibility with WordPress 7.0.
 
 = 1.1.3 =
 * Updated compatibility to WordPress 7.0
